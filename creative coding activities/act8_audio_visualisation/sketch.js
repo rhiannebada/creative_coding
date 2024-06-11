@@ -1,47 +1,46 @@
-let mic, fft, amplitude;
+let song;
+let fft;
+
+function preload() {
+  song = loadSound('ENHYPEN.mp3');
+}
 
 function setup() {
-  createCanvas(800, 600);
-  noFill();
-
-  // Create an audio input and start it
-  mic = new p5.AudioIn();
-  mic.start();
-
-  // Create the FFT analyzer and set the input to the microphone
+  createCanvas(windowWidth, windowHeight);
   fft = new p5.FFT();
-  fft.setInput(mic);
-
-  // Create an amplitude analyzer and set the input to the microphone
-  amplitude = new p5.Amplitude();
-  amplitude.setInput(mic);
+  song.loop();
+  noStroke();
 }
 
 function draw() {
-  background(0);
-
-  // Get the frequency spectrum
+  background(0, 25);  // Light background to match pastel theme
   let spectrum = fft.analyze();
 
-  // Draw the frequency spectrum
-  stroke(0, 255, 0);
-  strokeWeight(2);
-  beginShape();
-  for (let i = 0; i < spectrum.length; i++) {
-    let x = map(i, 0, spectrum.length, 0, width);
-    let y = map(spectrum[i], 0, 255, height, 0);
-    vertex(x, y);
+  // Visualization for bass (low frequencies)
+  for (let i = 0; i < spectrum.length / 4; i++) {
+    let x = map(i, 0, spectrum.length / 4, 0, width);
+    let h = map(spectrum[i], 0, 255, 0, height * 2);  // Make bass more prominent
+    fill(map(i, 0, spectrum.length / 4, 0, 360), 100, 50, 150);  // Rainbow color
+    rect(x, height - h, width / spectrum.length / 4, h);
   }
-  endShape();
 
-  // Get the amplitude level
-  let level = amplitude.getLevel();
+  // Visualization for mid (middle frequencies)
+  for (let i = spectrum.length / 4; i < spectrum.length / 2; i++) {
+    let x = map(i, spectrum.length / 4, spectrum.length / 2, 0, width);
+    let h = map(spectrum[i], 0, 255, 0, height);
+    fill(map(i, spectrum.length / 4, spectrum.length / 2, 0, 360), 100, 50, 150);  // Rainbow color
+    ellipse(x, height / 2, width / spectrum.length / 2, h);
+  }
 
-  // Map the amplitude level to a visual range
-  let size = map(level, 0, 1, 0, 400);
+  // Visualization for treble (high frequencies)
+  for (let i = spectrum.length / 2; i < spectrum.length; i++) {
+    let x = map(i, spectrum.length / 2, spectrum.length, 0, width);
+    let h = map(spectrum[i], 0, 255, 0, height);
+    fill(map(i, spectrum.length / 2, spectrum.length, 0, 360), 100, 50, 150);  // Rainbow color
+    triangle(x, height, x + width / spectrum.length / 2, height - h, x - width / spectrum.length / 2, height - h);
+  }
+}
 
-  // Draw a circle in the center of the canvas based on the amplitude level
-  fill(255, 0, 150, 150);
-  noStroke();
-  ellipse(width / 2, height / 2, size, size);
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }

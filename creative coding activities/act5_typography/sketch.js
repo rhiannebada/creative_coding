@@ -11,18 +11,18 @@ function setup() {
   background(250);
   textFont(font);
 
-  // apply random shapes in the background
+  // Apply random shapes in the background
   for (let i = 0; i < 400; i++) {
-    let x = random(width); // Random x-coordinate
-    let y = random(height); // Random y-coordinate
-    let shapesSize = random(5, 40); // Random size for the shapes
+    let x = random(width); // random x-coordinate
+    let y = random(height); // random y-coordinate
+    let shapesSize = random(5, 40); // random size for the shapes
 
-    // random shape (circle or square),
+    // Random shape (circle or square),
     let shapes = floor(random(2));
 
-    // random shape color
+    // Random shape color
     let shapesColors = color(random(200, 255), random(200, 255), random(200, 255));
-    fill(shapesColors); // Set the fill color
+    fill(shapesColors); 
     noStroke();
     if (shapes === 0) {
       circle(y, x, shapesSize); 
@@ -33,7 +33,7 @@ function setup() {
 
   // Calculate text width and height
   let textWidth = font.textBounds("BATH SPA UNIVERSITY", 0, 0, 90).w;
-  let textHeight = 90; // Fixed height based on the text size
+  let textHeight = 90; // fxed height based on the text size
 
   // Center the text horizontally and vertically
   let x = (width - textWidth) / 2;

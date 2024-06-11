@@ -1,4 +1,4 @@
-let trail = []; // Array to store trail positions
+let trail = []; // array to store trail positions
 let trailSize = 45; // Size of the trail ellipses
 
 function setup() {
@@ -7,12 +7,12 @@ function setup() {
 }
 
 function draw() {
-  background(255); // Clear background each frame
+  background(255); // clear background each frame
   
   // Draw the trail
   for (let i = 0; i < trail.length; i++) {
     let pos = trail[i];
-    let pastelColor = generatePastelColor(); // Generate random pastel color
+    let pastelColor = generatePastelColor(); 
     fill(pastelColor[0], pastelColor[1], pastelColor[2], 150);
     noStroke();
     ellipse(pos.x, pos.y, trailSize, trailSize);
@@ -38,7 +38,6 @@ function keyPressed() {
 }
 
 function generatePastelColor() {
-  // Generate random pastel color (R, G, B)
   let r = random(200, 255);
   let g = random(200, 255);
   let b = random(200, 255);

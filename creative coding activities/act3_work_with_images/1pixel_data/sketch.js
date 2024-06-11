@@ -7,20 +7,19 @@ function preload() {
 function setup() {
   createCanvas(400, 400);
   background (0);
-  noCursor ();
+  noCursor (); // Hide cursor from the canvas
 }
 
 function draw() {
   background(0);
-    x=mouseX
+    x=mouseX // current mouse coordinates
     y=mouseY
-  noStroke ();
+  noStroke (); //disable drawing stroke
   image (img, 0, 0);
-    var c = get (x,y);
+    var c = get (x,y); // get pixel color from current mouse position
     fill(c);
-    rect (x,y,35,35);
+    rect (x,y,35,35); // square at the mouse position
   
   img.resize(400, 400);
 
   }
-

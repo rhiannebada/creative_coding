@@ -34,10 +34,9 @@ function setup() {
 }
 
 function draw() {
-  // background image
   image(backgroundImg, 0, 0, width, height);
 
-  // display the game obstacles
+  // Display the game obstacles
   if (millis() >= lastSpawn + spawnDelay) {
     obstacles.push(new Obstacles());
     spawnDelay = random([0.7, 0.8, 0.9, 1, 2]) * 1000;
@@ -81,7 +80,7 @@ function keyPressed() {
   }
 }
 
-// restart game when the canvas is clicked on
+// Restart game when the canvas is clicked on
 function mousePressed() {
   if (screen === 2) {
     restartGame();
@@ -95,7 +94,7 @@ const countScore = () => {
   textAlign(LEFT)
 };
 
-// restarts the game
+// Restarts the game
 const restartGame = () => {
   score = 0;
   obstacles = [];
@@ -114,7 +113,7 @@ const showGameOver = () => {
   text("Game Over", width / 2, height / 2);
 };
 
-// creating the dino for the game which is mario
+// Create the dino for the game which is mario
 class DinoSquare {
   constructor() {
     this.x = 20;
@@ -159,7 +158,7 @@ class DinoSquare {
   }
 }
 
-// Class that creates the obstacles for the game
+// Create the obstacles for the game
 class Obstacles {
   constructor() {
     this.obstacleSize = 40;
